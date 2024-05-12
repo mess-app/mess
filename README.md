@@ -1,3 +1,3 @@
-# mess
+# Mess
 
-A new Flutter project.
+Messaging as simple as it can be.

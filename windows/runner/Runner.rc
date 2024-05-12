@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "dev.krtirtho" "\0"
-            VALUE "FileDescription", "mess" "\0"
+            VALUE "FileDescription", "Mess" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "mess" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 dev.krtirtho. All rights reserved." "\0"
             VALUE "OriginalFilename", "mess.exe" "\0"
-            VALUE "ProductName", "mess" "\0"
+            VALUE "ProductName", "Mess" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

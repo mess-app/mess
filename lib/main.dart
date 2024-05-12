@@ -9,7 +9,7 @@ void main() async {
 
   await SupabaseService.initialize();
 
-  runApp(const MainApp());
+  runApp(const ProviderScope(child: MainApp()));
 }
 
 class MainApp extends HookConsumerWidget {

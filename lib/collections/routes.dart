@@ -14,13 +14,14 @@ final shellNavigatorKey = GlobalKey<NavigatorState>();
 final routerProvider = Provider((ref) {
   return GoRouter(
     navigatorKey: rootNavigatorKey,
+    initialLocation: "/login",
     routes: [
       ShellRoute(
         navigatorKey: shellNavigatorKey,
         builder: (context, state, child) => ShellPage(child: child),
         routes: [
           GoRoute(
-            path: "/home",
+            path: "/",
             name: HomePage.name,
             builder: (context, state) => const HomePage(),
           ),
