@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../mess-backend"
+		}
+	],
+  "settings": {}
+}
