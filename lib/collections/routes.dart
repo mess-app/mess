@@ -7,6 +7,7 @@ import 'package:mess/pages/shell/chats/chats.dart';
 import 'package:mess/pages/shell/home/home.dart';
 import 'package:mess/pages/shell/shell.dart';
 import 'package:mess/pages/shell/store/store.dart';
+import 'package:mess/services/supabase/supabase.dart';
 
 final rootNavigatorKey = GlobalKey<NavigatorState>();
 final shellNavigatorKey = GlobalKey<NavigatorState>();
@@ -19,6 +20,13 @@ final routerProvider = Provider((ref) {
       ShellRoute(
         navigatorKey: shellNavigatorKey,
         builder: (context, state, child) => ShellPage(child: child),
+        redirect: (context, state) {
+          if (supabaseService.user == null) {
+            return "/login";
+          }
+
+          return null;
+        },
         routes: [
           GoRoute(
             path: "/",
@@ -46,6 +54,13 @@ final routerProvider = Provider((ref) {
       GoRoute(
         path: "/login",
         name: LoginPage.name,
+        redirect: (context, state) {
+          if (supabaseService.user != null) {
+            return "/";
+          }
+
+          return null;
+        },
         builder: (context, state) => const LoginPage(),
       ),
     ],

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mess/pages/shell/home/home.dart';
 import 'package:mess/services/supabase/supabase.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
@@ -40,6 +42,10 @@ class LoginPage extends HookConsumerWidget {
               ),
               onPressed: () async {
                 await supabaseService.signInWithGoogle();
+
+                if (supabaseService.user != null && context.mounted) {
+                  context.goNamed(HomePage.name);
+                }
               },
             ),
           ),
