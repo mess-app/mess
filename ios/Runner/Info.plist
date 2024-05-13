@@ -69,5 +69,11 @@
         </array>
       </dict>
     </array>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Allow access to photo library for profile avatars and image sharing.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Allow access to camera for profile avatars and image sharing.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Allow access to microphone for call and speech to text functionalities</string>
   </dict>
 </plist>

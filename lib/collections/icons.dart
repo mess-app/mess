@@ -6,6 +6,9 @@ class AppIcons {
   static const store = Bootstrap.bag;
   static const personAdd = Bootstrap.person_add;
   static const settings = LineAwesome.cog_solid;
+  static const camera = Bootstrap.camera;
+  static const gallery = Bootstrap.image;
+  static const arrowRight = Bootstrap.arrow_right;
 
   static const homeFilled = Bootstrap.house_fill;
   static const chatsFilled = Bootstrap.chat_fill;

@@ -44,3 +44,4 @@ app.*.map.json
 
 *.env*
 !.env.example
+lib/collections/env.g.dart
