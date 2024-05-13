@@ -59,6 +59,26 @@ ThemeData buildTheme(Brightness brightness) {
       surfaceTintColor: Colors.transparent,
       color: colorScheme.background,
     ),
+    searchBarTheme: SearchBarThemeData(
+      shape: const MaterialStatePropertyAll(
+        RoundedRectangleBorder(borderRadius: defaultBorderRadius),
+      ),
+      elevation: const MaterialStatePropertyAll(0),
+      backgroundColor: MaterialStatePropertyAll(colorScheme.surfaceVariant),
+      overlayColor: MaterialStatePropertyAll(colorScheme.surfaceVariant),
+      constraints: const BoxConstraints(
+        minHeight: 40,
+        maxHeight: 40,
+      ),
+      hintStyle: MaterialStatePropertyAll(
+        TextStyle(
+          fontSize: 14,
+          color: colorScheme.onSurface.withOpacity(0.6),
+          fontWeight: FontWeight.normal,
+          height: .8,
+        ),
+      ),
+    ),
     inputDecorationTheme: InputDecorationTheme(
       isDense: true,
       filled: true,

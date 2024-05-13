@@ -7,6 +7,7 @@ class SupabaseProfile with _$SupabaseProfile {
     @JsonKey(name: "first_name") required String firstName,
     @JsonKey(name: "last_name") String? lastName,
     @JsonKey(name: "avatar_url") String? avatarUrl,
+    String? status,
     @JsonKey(name: "user_id") required String userId,
   }) = _SupabaseProfile;
 
@@ -20,6 +21,7 @@ class SupabaseProfileInsert with _$SupabaseProfileInsert {
     @JsonKey(name: "first_name") required String firstName,
     @JsonKey(name: "last_name") String? lastName,
     @JsonKey(name: "avatar_url") String? avatarUrl,
+    String? status,
     @JsonKey(name: "user_id") required String userId,
   }) = _SupabaseProfileInsert;
 
@@ -32,6 +34,7 @@ class SupabaseProfileUpdate with _$SupabaseProfileUpdate {
   factory SupabaseProfileUpdate({
     @JsonKey(name: "first_name") String? firstName,
     @JsonKey(name: "last_name") String? lastName,
+    String? status,
     @JsonKey(name: "avatar_url") String? avatarUrl,
   }) = _SupabaseProfileUpdate;
 

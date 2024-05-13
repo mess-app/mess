@@ -32,7 +32,16 @@ class UserProfileNotifier extends AsyncNotifier<SupabaseProfile?> {
           .single()
           .withConverter<SupabaseProfile>(SupabaseProfile.fromJson);
 
-      return profile;
+      if (profile.avatarUrl == null) return profile;
+
+      final avatarUrl = await supabaseService.client.storage
+          .from(SupabaseBuckets.avatars)
+          .createSignedUrl(
+            profile.avatarUrl!,
+            const Duration(days: 1).inSeconds,
+          );
+
+      return profile.copyWith(avatarUrl: avatarUrl);
     } on PostgrestException catch (e) {
       if (e.code == "PGRST116") {
         return null;
@@ -45,21 +54,25 @@ class UserProfileNotifier extends AsyncNotifier<SupabaseProfile?> {
   Future<String> uploadAvatar(Uint8List bytes, String extension) async {
     if (state.asData?.value == null) throw Exception("Profile not found");
 
-    return await supabaseService.client.storage
+    final path = "${supabaseService.user!.id}$extension";
+
+    await supabaseService.client.storage
         .from(SupabaseBuckets.avatars)
         .uploadBinary(
-          "${supabaseService.user!.id}.$extension",
+          path,
           bytes,
           fileOptions: const FileOptions(upsert: true, cacheControl: "3600"),
         );
+
+    return path;
   }
 
   Future<void> create(SupabaseProfileInsert profile) async {
     if (state.asData?.value != null) return;
 
-    await supabaseService.client
-        .from(SupabaseTables.profile)
-        .insert(profile.toJson());
+    await supabaseService.client.from(SupabaseTables.profile).insert(
+          profile.toJson()..removeWhere((key, value) => value == null),
+        );
 
     state = await AsyncValue.guard(() async => await build());
   }
@@ -67,11 +80,14 @@ class UserProfileNotifier extends AsyncNotifier<SupabaseProfile?> {
   Future<void> updateIt(
     SupabaseProfileUpdate profile,
   ) async {
-    if (state.asData?.value != null) return;
+    if (state.asData?.value == null) return;
 
     await supabaseService.client
         .from(SupabaseTables.profile)
-        .update(profile.toJson());
+        .update(
+          profile.toJson()..removeWhere((key, value) => value == null),
+        )
+        .eq("user_id", supabaseService.user!.id);
   }
 }
 

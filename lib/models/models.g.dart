@@ -13,6 +13,7 @@ _$SupabaseProfileImpl _$$SupabaseProfileImplFromJson(
       firstName: json['first_name'] as String,
       lastName: json['last_name'] as String?,
       avatarUrl: json['avatar_url'] as String?,
+      status: json['status'] as String?,
       userId: json['user_id'] as String,
     );
 
@@ -23,6 +24,7 @@ Map<String, dynamic> _$$SupabaseProfileImplToJson(
       'first_name': instance.firstName,
       'last_name': instance.lastName,
       'avatar_url': instance.avatarUrl,
+      'status': instance.status,
       'user_id': instance.userId,
     };
 
@@ -32,6 +34,7 @@ _$SupabaseProfileInsertImpl _$$SupabaseProfileInsertImplFromJson(
       firstName: json['first_name'] as String,
       lastName: json['last_name'] as String?,
       avatarUrl: json['avatar_url'] as String?,
+      status: json['status'] as String?,
       userId: json['user_id'] as String,
     );
 
@@ -41,6 +44,7 @@ Map<String, dynamic> _$$SupabaseProfileInsertImplToJson(
       'first_name': instance.firstName,
       'last_name': instance.lastName,
       'avatar_url': instance.avatarUrl,
+      'status': instance.status,
       'user_id': instance.userId,
     };
 
@@ -49,6 +53,7 @@ _$SupabaseProfileUpdateImpl _$$SupabaseProfileUpdateImplFromJson(
     _$SupabaseProfileUpdateImpl(
       firstName: json['first_name'] as String?,
       lastName: json['last_name'] as String?,
+      status: json['status'] as String?,
       avatarUrl: json['avatar_url'] as String?,
     );
 
@@ -57,5 +62,6 @@ Map<String, dynamic> _$$SupabaseProfileUpdateImplToJson(
     <String, dynamic>{
       'first_name': instance.firstName,
       'last_name': instance.lastName,
+      'status': instance.status,
       'avatar_url': instance.avatarUrl,
     };

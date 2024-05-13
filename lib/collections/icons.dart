@@ -9,6 +9,8 @@ class AppIcons {
   static const camera = Bootstrap.camera;
   static const gallery = Bootstrap.image;
   static const arrowRight = Bootstrap.arrow_right;
+  static const search = Bootstrap.search;
+  static const person = Bootstrap.person;
 
   static const homeFilled = Bootstrap.house_fill;
   static const chatsFilled = Bootstrap.chat_fill;
