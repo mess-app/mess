@@ -1,11 +1,13 @@
 import 'package:icons_plus/icons_plus.dart';
 
 class AppIcons {
-  static const home = EvaIcons.home_outline;
-  static const chats = EvaIcons.message_circle_outline;
-  static const store = EvaIcons.shopping_bag_outline;
+  static const home = Bootstrap.house;
+  static const chats = Bootstrap.chat;
+  static const store = Bootstrap.bag;
+  static const personAdd = Bootstrap.person_add;
+  static const settings = LineAwesome.cog_solid;
 
-  static const homeFilled = EvaIcons.home;
-  static const chatsFilled = EvaIcons.message_circle;
-  static const storeFilled = EvaIcons.shopping_bag;
+  static const homeFilled = Bootstrap.house_fill;
+  static const chatsFilled = Bootstrap.chat_fill;
+  static const storeFilled = Bootstrap.bag_fill;
 }
