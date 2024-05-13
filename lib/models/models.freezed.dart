@@ -288,6 +288,7 @@ mixin _$SupabaseProfileInsert {
   String? get status => throw _privateConstructorUsedError;
   @JsonKey(name: "user_id")
   String get userId => throw _privateConstructorUsedError;
+  String get username => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -306,7 +307,8 @@ abstract class $SupabaseProfileInsertCopyWith<$Res> {
       @JsonKey(name: "last_name") String? lastName,
       @JsonKey(name: "avatar_url") String? avatarUrl,
       String? status,
-      @JsonKey(name: "user_id") String userId});
+      @JsonKey(name: "user_id") String userId,
+      String username});
 }
 
 /// @nodoc
@@ -328,6 +330,7 @@ class _$SupabaseProfileInsertCopyWithImpl<$Res,
     Object? avatarUrl = freezed,
     Object? status = freezed,
     Object? userId = null,
+    Object? username = null,
   }) {
     return _then(_value.copyWith(
       firstName: null == firstName
@@ -350,6 +353,10 @@ class _$SupabaseProfileInsertCopyWithImpl<$Res,
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -368,7 +375,8 @@ abstract class _$$SupabaseProfileInsertImplCopyWith<$Res>
       @JsonKey(name: "last_name") String? lastName,
       @JsonKey(name: "avatar_url") String? avatarUrl,
       String? status,
-      @JsonKey(name: "user_id") String userId});
+      @JsonKey(name: "user_id") String userId,
+      String username});
 }
 
 /// @nodoc
@@ -388,6 +396,7 @@ class __$$SupabaseProfileInsertImplCopyWithImpl<$Res>
     Object? avatarUrl = freezed,
     Object? status = freezed,
     Object? userId = null,
+    Object? username = null,
   }) {
     return _then(_$SupabaseProfileInsertImpl(
       firstName: null == firstName
@@ -410,6 +419,10 @@ class __$$SupabaseProfileInsertImplCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -422,7 +435,8 @@ class _$SupabaseProfileInsertImpl implements _SupabaseProfileInsert {
       @JsonKey(name: "last_name") this.lastName,
       @JsonKey(name: "avatar_url") this.avatarUrl,
       this.status,
-      @JsonKey(name: "user_id") required this.userId});
+      @JsonKey(name: "user_id") required this.userId,
+      required this.username});
 
   factory _$SupabaseProfileInsertImpl.fromJson(Map<String, dynamic> json) =>
       _$$SupabaseProfileInsertImplFromJson(json);
@@ -441,10 +455,12 @@ class _$SupabaseProfileInsertImpl implements _SupabaseProfileInsert {
   @override
   @JsonKey(name: "user_id")
   final String userId;
+  @override
+  final String username;
 
   @override
   String toString() {
-    return 'SupabaseProfileInsert(firstName: $firstName, lastName: $lastName, avatarUrl: $avatarUrl, status: $status, userId: $userId)';
+    return 'SupabaseProfileInsert(firstName: $firstName, lastName: $lastName, avatarUrl: $avatarUrl, status: $status, userId: $userId, username: $username)';
   }
 
   @override
@@ -459,13 +475,15 @@ class _$SupabaseProfileInsertImpl implements _SupabaseProfileInsert {
             (identical(other.avatarUrl, avatarUrl) ||
                 other.avatarUrl == avatarUrl) &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.userId, userId) || other.userId == userId));
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.username, username) ||
+                other.username == username));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, firstName, lastName, avatarUrl, status, userId);
+  int get hashCode => Object.hash(
+      runtimeType, firstName, lastName, avatarUrl, status, userId, username);
 
   @JsonKey(ignore: true)
   @override
@@ -484,12 +502,12 @@ class _$SupabaseProfileInsertImpl implements _SupabaseProfileInsert {
 
 abstract class _SupabaseProfileInsert implements SupabaseProfileInsert {
   factory _SupabaseProfileInsert(
-          {@JsonKey(name: "first_name") required final String firstName,
-          @JsonKey(name: "last_name") final String? lastName,
-          @JsonKey(name: "avatar_url") final String? avatarUrl,
-          final String? status,
-          @JsonKey(name: "user_id") required final String userId}) =
-      _$SupabaseProfileInsertImpl;
+      {@JsonKey(name: "first_name") required final String firstName,
+      @JsonKey(name: "last_name") final String? lastName,
+      @JsonKey(name: "avatar_url") final String? avatarUrl,
+      final String? status,
+      @JsonKey(name: "user_id") required final String userId,
+      required final String username}) = _$SupabaseProfileInsertImpl;
 
   factory _SupabaseProfileInsert.fromJson(Map<String, dynamic> json) =
       _$SupabaseProfileInsertImpl.fromJson;
@@ -508,6 +526,8 @@ abstract class _SupabaseProfileInsert implements SupabaseProfileInsert {
   @override
   @JsonKey(name: "user_id")
   String get userId;
+  @override
+  String get username;
   @override
   @JsonKey(ignore: true)
   _$$SupabaseProfileInsertImplCopyWith<_$SupabaseProfileInsertImpl>

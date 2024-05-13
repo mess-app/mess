@@ -36,6 +36,7 @@ _$SupabaseProfileInsertImpl _$$SupabaseProfileInsertImplFromJson(
       avatarUrl: json['avatar_url'] as String?,
       status: json['status'] as String?,
       userId: json['user_id'] as String,
+      username: json['username'] as String,
     );
 
 Map<String, dynamic> _$$SupabaseProfileInsertImplToJson(
@@ -46,6 +47,7 @@ Map<String, dynamic> _$$SupabaseProfileInsertImplToJson(
       'avatar_url': instance.avatarUrl,
       'status': instance.status,
       'user_id': instance.userId,
+      'username': instance.username,
     };
 
 _$SupabaseProfileUpdateImpl _$$SupabaseProfileUpdateImplFromJson(

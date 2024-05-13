@@ -8,6 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_image_picker/form_builder_image_picker.dart';
 import 'package:mess/collections/icons.dart';
+import 'package:mess/collections/supabase.dart';
 import 'package:mess/models/models.dart';
 import 'package:mess/pages/shell/home/home.dart';
 import 'package:mess/providers/supabase/profile/profile.dart';
@@ -24,6 +25,8 @@ class LoginProfilePage extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     final formKey = useMemoized(() => GlobalKey<FormBuilderState>(), []);
     final profileNotifier = ref.read(userProfileProvider.notifier);
+
+    final usernameExitsRef = useRef<String?>(null);
 
     return Scaffold(
       body: Container(
@@ -59,6 +62,28 @@ class LoginProfilePage extends HookConsumerWidget {
                 name: "last_name",
                 decoration: const InputDecoration(hintText: "Last Name"),
               ),
+              const Gap(10),
+              FormBuilderTextField(
+                name: "username",
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.match(
+                    r"^[a-z][a-z0-9_]*[a-z0-9]$",
+                    errorText: "User name can only contain a-z, 0-9, and _",
+                  ),
+                  (val) {
+                    if (usernameExitsRef.value != null &&
+                        usernameExitsRef.value == val) {
+                      return "Username already exits.";
+                    }
+                    return null;
+                  },
+                  FormBuilderValidators.required(),
+                ]),
+                decoration: const InputDecoration(
+                  hintText: "Username",
+                  errorMaxLines: 2,
+                ),
+              ),
               const Gap(30),
               SizedBox(
                 width: double.infinity,
@@ -76,6 +101,26 @@ class LoginProfilePage extends HookConsumerWidget {
                       return;
                     }
 
+                    final usernameExists = await supabaseService.client
+                        .from(SupabaseTables.profile)
+                        .select("username")
+                        .eq(
+                          "username",
+                          formKey.currentState!.value["username"],
+                        )
+                        .limit(1);
+
+                    if (usernameExists.isNotEmpty) {
+                      usernameExitsRef.value =
+                          formKey.currentState!.value["username"];
+                      formKey.currentState?.validate();
+                      return;
+                    } else if (usernameExists.isEmpty &&
+                        usernameExitsRef.value != null) {
+                      formKey.currentState?.saveAndValidate();
+                      usernameExitsRef.value = null;
+                    }
+
                     final avatar =
                         ((formKey.currentState!.value["avatar"] as List?)
                             ?.firstOrNull) as XFile?;
@@ -84,6 +129,7 @@ class LoginProfilePage extends HookConsumerWidget {
                       SupabaseProfileInsert(
                         firstName: formKey.currentState!.value["first_name"],
                         lastName: formKey.currentState!.value["last_name"],
+                        username: formKey.currentState!.value["username"],
                         userId: supabaseService.user!.id,
                       ),
                     );

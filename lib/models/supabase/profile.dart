@@ -23,6 +23,7 @@ class SupabaseProfileInsert with _$SupabaseProfileInsert {
     @JsonKey(name: "avatar_url") String? avatarUrl,
     String? status,
     @JsonKey(name: "user_id") required String userId,
+    required String username,
   }) = _SupabaseProfileInsert;
 
   factory SupabaseProfileInsert.fromJson(Map<String, dynamic> json) =>
