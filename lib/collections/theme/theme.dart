@@ -5,7 +5,15 @@ const brandColors = (
   ashGray: 0xFFc2cfb2,
   olivine: 0xFF8db580,
   battleshipGray: 0xFF7e8987,
-  englishViolet: 0xFF4b4a6,
+  englishViolet: 0xFF4b4ae6,
+);
+
+const brandColorsDark = (
+  lightGray: 0xFF424242,
+  ashGray: 0xFF302F2F,
+  olivine: 0xFF9AEF7D,
+  battleshipGray: 0xFF4D4D4D,
+  englishViolet: 0xFF6A1B9A,
 );
 
 final lightColorScheme = ColorScheme.light(
@@ -41,7 +49,38 @@ final lightColorScheme = ColorScheme.light(
   surfaceTint: Colors.black.withOpacity(0.1),
 );
 
-const darkColorScheme = ColorScheme.dark();
+final darkColorScheme = ColorScheme.dark(
+  primary: Color(brandColorsDark.olivine),
+  primaryContainer: Color(brandColorsDark.ashGray),
+  onPrimary: Colors.grey[100]!,
+  onPrimaryContainer: Colors.grey[800]!,
+  secondary: Color(brandColorsDark.englishViolet),
+  secondaryContainer: Color(brandColorsDark.battleshipGray),
+  onSecondary: Colors.white,
+  onSecondaryContainer: Colors.grey[800]!,
+  surface: Colors.grey[900]!,
+  surfaceVariant: Color(brandColorsDark.lightGray),
+  onSurface: Colors.grey[50]!,
+  onSurfaceVariant: Colors.grey[200]!,
+  background: Colors.grey[900]!,
+  onBackground: Colors.grey[50]!,
+  error: Colors.red[300]!,
+  errorContainer: Colors.red[900]!,
+  onError: Colors.grey[50]!,
+  onErrorContainer: Colors.white,
+  inversePrimary: const Color(0xFF9AEF7D),
+  inverseSurface: Colors.white,
+  onInverseSurface: Colors.black,
+  outline: Colors.grey[600]!,
+  outlineVariant: Colors.grey,
+  tertiary: Colors.purple[200],
+  tertiaryContainer: Colors.purple[800],
+  onTertiary: Colors.grey[800],
+  onTertiaryContainer: Colors.purple[200],
+  scrim: Colors.white.withOpacity(0.5),
+  shadow: Colors.white.withOpacity(0.1),
+  surfaceTint: Colors.white.withOpacity(0.1),
+);
 
 ThemeData buildTheme(Brightness brightness) {
   final isDark = brightness == Brightness.dark;
