@@ -7,3 +7,5 @@ part 'models.g.dart';
 part 'fake.dart';
 
 part 'supabase/profile.dart';
+part 'supabase/connections.dart';
+part 'supabase/groups.dart';
