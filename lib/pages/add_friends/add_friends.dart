@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mess/collections/icons.dart';
 import 'package:mess/modules/profile/profile_tile.dart';
 import 'package:mess/pages/add_friends/pending_connections/pending_connections.dart';
+import 'package:mess/providers/supabase/connections/connections.dart';
 import 'package:mess/providers/supabase/connections/pending.dart';
 import 'package:mess/providers/supabase/profile/find.dart';
 
@@ -20,6 +21,13 @@ class AddFriendsPage extends HookConsumerWidget {
     final controller = useTextEditingController();
     final searchText = useState(controller.text);
     final findProfile = ref.watch(findProfileProvider(searchText.value));
+
+    final receivedConnectionsQuery = ref.watch(pendingConnectionsProvider);
+    final receivedConnections = receivedConnectionsQuery.asData?.value ?? [];
+
+    final connectionsQuery = ref.watch(connectionsProvider);
+    final connections = connectionsQuery.asData?.value ?? [];
+
     final pendingConnectionsQuery = ref.watch(pendingConnectionsProvider);
     final pendingConnections = pendingConnectionsQuery.asData?.value ?? [];
     final pendingConnectionsNotifier =
@@ -82,20 +90,33 @@ class AddFriendsPage extends HookConsumerWidget {
                       if (value == null) return const SizedBox.shrink();
                       final alreadySent = pendingConnections
                           .any((s) => s.recipientId == value.id);
+                      final alreadyReceived = receivedConnections
+                          .any((s) => s.pioneerId == value.id);
+                      final alreadyConnected = connections.any((s) =>
+                          s.pioneerId == value.id || s.recipientId == value.id);
 
                       return ProfileTile(
                         profile: value,
-                        trailing: alreadySent
-                            ? Icon(AppIcons.deliveryDone,
-                                color: colorScheme.primary)
-                            : const Icon(AppIcons.personAdd),
-                        selected: alreadySent,
-                        onTap: alreadySent
-                            ? null
-                            : () async {
-                                await pendingConnectionsNotifier
-                                    .create(value.id);
-                              },
+                        trailing: alreadySent || alreadyReceived
+                            ? Icon(
+                                AppIcons.deliveryDone,
+                                color: colorScheme.primary,
+                              )
+                            : alreadyConnected
+                                ? Icon(
+                                    AppIcons.personCheck,
+                                    color: colorScheme.primary,
+                                  )
+                                : const Icon(AppIcons.personAdd),
+                        selected:
+                            alreadySent || alreadyReceived || alreadyConnected,
+                        onTap:
+                            alreadySent || alreadyReceived || alreadyConnected
+                                ? null
+                                : () async {
+                                    await pendingConnectionsNotifier
+                                        .create(value.id);
+                                  },
                       );
                     }),
                   AsyncLoading() =>

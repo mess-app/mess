@@ -5,6 +5,7 @@ import 'package:mess/pages/add_friends/add_friends.dart';
 import 'package:mess/pages/add_friends/pending_connections/pending_connections.dart';
 import 'package:mess/pages/login/login.dart';
 import 'package:mess/pages/login/profile/profile.dart';
+import 'package:mess/pages/notifications/notifications.dart';
 import 'package:mess/pages/settings/settings.dart';
 import 'package:mess/pages/shell/chats/chats.dart';
 import 'package:mess/pages/shell/home/home.dart';
@@ -104,6 +105,12 @@ final routerProvider = Provider((ref) {
           ),
         ],
       ),
+      GoRoute(
+        path: "/notifications",
+        name: NotificationsPage.name,
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const NotificationsPage(),
+      )
     ],
   );
 });

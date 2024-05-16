@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mess/collections/icons.dart';
 import 'package:mess/modules/home/sections/profile.dart';
 import 'package:mess/pages/add_friends/add_friends.dart';
+import 'package:mess/pages/notifications/notifications.dart';
 import 'package:mess/pages/settings/settings.dart';
 
 class HomePage extends HookConsumerWidget {
@@ -17,11 +18,18 @@ class HomePage extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 10,
         title: const Text("MESS"),
         titleTextStyle:
             textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
         centerTitle: false,
         actions: [
+          IconButton(
+            icon: const Icon(AppIcons.notifications, size: 18),
+            onPressed: () {
+              context.pushNamed(NotificationsPage.name);
+            },
+          ),
           IconButton(
             icon: const Icon(AppIcons.personAdd),
             onPressed: () {

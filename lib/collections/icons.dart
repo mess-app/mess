@@ -17,6 +17,8 @@ class AppIcons {
   static const palette = Bootstrap.palette;
   static const clear = Bootstrap.x;
   static const deliveryDone = Bootstrap.send_check;
+  static const notifications = Bootstrap.bell;
+  static const personCheck = Bootstrap.person_check;
 
   static const homeFilled = Bootstrap.house_fill;
   static const chatsFilled = Bootstrap.chat_fill;
