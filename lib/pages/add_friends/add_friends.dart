@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mess/collections/icons.dart';
+import 'package:mess/providers/supabase/connections/pending.dart';
 import 'package:mess/providers/supabase/profile/find.dart';
 
 class AddFriendsPage extends HookConsumerWidget {
@@ -12,13 +13,19 @@ class AddFriendsPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
+    final ThemeData(:colorScheme) = Theme.of(context);
+
     final controller = useTextEditingController();
     final searchText = useState(controller.text);
     final findProfile = ref.watch(findProfileProvider(searchText.value));
+    final pendingConnectionsQuery = ref.watch(pendingConnectionsProvider);
+    final pendingConnections = pendingConnectionsQuery.asData?.value ?? [];
+    final pendingConnectionsNotifier =
+        ref.watch(pendingConnectionsProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add Friends"),
+        title: const Text("New connection"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -60,25 +67,38 @@ class AddFriendsPage extends HookConsumerWidget {
                 ),
                 const Gap(20),
                 switch (findProfile) {
-                  AsyncData(:final value) => value == null
-                      ? const SizedBox.shrink()
-                      : ListTile(
-                          leading: CircleAvatar(
-                            backgroundImage: value.avatarUrl == null
-                                ? null
-                                : CachedNetworkImageProvider(
-                                    value.avatarUrl ?? "",
-                                  ),
-                            child: value.avatarUrl == null
-                                ? const Icon(AppIcons.person)
-                                : null,
-                          ),
-                          title: Text("${value.firstName} ${value.lastName}"),
-                          subtitle:
-                              value.status == null ? null : Text(value.status!),
-                          trailing: const Icon(AppIcons.personAdd),
-                          onTap: () {},
+                  AsyncData(:final value) => Builder(builder: (context) {
+                      if (value == null) return const SizedBox.shrink();
+                      final alreadySent = pendingConnections
+                          .any((s) => s.recipient == value.userId);
+
+                      return ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: value.avatarUrl == null
+                              ? null
+                              : CachedNetworkImageProvider(
+                                  value.avatarUrl ?? "",
+                                ),
+                          child: value.avatarUrl == null
+                              ? const Icon(AppIcons.person)
+                              : null,
                         ),
+                        title: Text("${value.firstName} ${value.lastName}"),
+                        subtitle:
+                            value.status == null ? null : Text(value.status!),
+                        trailing: alreadySent
+                            ? Icon(AppIcons.deliveryDone,
+                                color: colorScheme.primary)
+                            : const Icon(AppIcons.personAdd),
+                        selected: alreadySent,
+                        onTap: alreadySent
+                            ? null
+                            : () async {
+                                await pendingConnectionsNotifier
+                                    .create(value.userId);
+                              },
+                      );
+                    }),
                   AsyncLoading() =>
                     const Center(child: CircularProgressIndicator()),
                   _ => Center(
