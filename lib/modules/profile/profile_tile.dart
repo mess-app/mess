@@ -39,6 +39,7 @@ class ProfileTile extends StatelessWidget {
       selected: selected,
       onTap: selected ? null : onTap,
       isThreeLine: isThreeLine,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 3, vertical: 0),
     );
   }
 }
