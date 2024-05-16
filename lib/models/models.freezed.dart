@@ -782,8 +782,12 @@ mixin _$SupabaseConnection {
   String get id => throw _privateConstructorUsedError;
   @JsonKey(name: "created_at")
   DateTime get createdAt => throw _privateConstructorUsedError;
-  String get recipient => throw _privateConstructorUsedError;
-  String get pioneer => throw _privateConstructorUsedError;
+  @JsonKey(name: "recipient_id")
+  String get recipientId => throw _privateConstructorUsedError;
+  @JsonKey(name: "pioneer_id")
+  String get pioneerId => throw _privateConstructorUsedError;
+  SupabaseProfile? get recipient => throw _privateConstructorUsedError;
+  SupabaseProfile? get pioneer => throw _privateConstructorUsedError;
   SupabaseConnectionStatus get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -801,9 +805,14 @@ abstract class $SupabaseConnectionCopyWith<$Res> {
   $Res call(
       {String id,
       @JsonKey(name: "created_at") DateTime createdAt,
-      String recipient,
-      String pioneer,
+      @JsonKey(name: "recipient_id") String recipientId,
+      @JsonKey(name: "pioneer_id") String pioneerId,
+      SupabaseProfile? recipient,
+      SupabaseProfile? pioneer,
       SupabaseConnectionStatus status});
+
+  $SupabaseProfileCopyWith<$Res>? get recipient;
+  $SupabaseProfileCopyWith<$Res>? get pioneer;
 }
 
 /// @nodoc
@@ -821,8 +830,10 @@ class _$SupabaseConnectionCopyWithImpl<$Res, $Val extends SupabaseConnection>
   $Res call({
     Object? id = null,
     Object? createdAt = null,
-    Object? recipient = null,
-    Object? pioneer = null,
+    Object? recipientId = null,
+    Object? pioneerId = null,
+    Object? recipient = freezed,
+    Object? pioneer = freezed,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
@@ -834,19 +845,51 @@ class _$SupabaseConnectionCopyWithImpl<$Res, $Val extends SupabaseConnection>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      recipient: null == recipient
+      recipientId: null == recipientId
+          ? _value.recipientId
+          : recipientId // ignore: cast_nullable_to_non_nullable
+              as String,
+      pioneerId: null == pioneerId
+          ? _value.pioneerId
+          : pioneerId // ignore: cast_nullable_to_non_nullable
+              as String,
+      recipient: freezed == recipient
           ? _value.recipient
           : recipient // ignore: cast_nullable_to_non_nullable
-              as String,
-      pioneer: null == pioneer
+              as SupabaseProfile?,
+      pioneer: freezed == pioneer
           ? _value.pioneer
           : pioneer // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SupabaseProfile?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as SupabaseConnectionStatus,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SupabaseProfileCopyWith<$Res>? get recipient {
+    if (_value.recipient == null) {
+      return null;
+    }
+
+    return $SupabaseProfileCopyWith<$Res>(_value.recipient!, (value) {
+      return _then(_value.copyWith(recipient: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SupabaseProfileCopyWith<$Res>? get pioneer {
+    if (_value.pioneer == null) {
+      return null;
+    }
+
+    return $SupabaseProfileCopyWith<$Res>(_value.pioneer!, (value) {
+      return _then(_value.copyWith(pioneer: value) as $Val);
+    });
   }
 }
 
@@ -861,9 +904,16 @@ abstract class _$$SupabaseConnectionImplCopyWith<$Res>
   $Res call(
       {String id,
       @JsonKey(name: "created_at") DateTime createdAt,
-      String recipient,
-      String pioneer,
+      @JsonKey(name: "recipient_id") String recipientId,
+      @JsonKey(name: "pioneer_id") String pioneerId,
+      SupabaseProfile? recipient,
+      SupabaseProfile? pioneer,
       SupabaseConnectionStatus status});
+
+  @override
+  $SupabaseProfileCopyWith<$Res>? get recipient;
+  @override
+  $SupabaseProfileCopyWith<$Res>? get pioneer;
 }
 
 /// @nodoc
@@ -879,8 +929,10 @@ class __$$SupabaseConnectionImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? createdAt = null,
-    Object? recipient = null,
-    Object? pioneer = null,
+    Object? recipientId = null,
+    Object? pioneerId = null,
+    Object? recipient = freezed,
+    Object? pioneer = freezed,
     Object? status = null,
   }) {
     return _then(_$SupabaseConnectionImpl(
@@ -892,14 +944,22 @@ class __$$SupabaseConnectionImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      recipient: null == recipient
+      recipientId: null == recipientId
+          ? _value.recipientId
+          : recipientId // ignore: cast_nullable_to_non_nullable
+              as String,
+      pioneerId: null == pioneerId
+          ? _value.pioneerId
+          : pioneerId // ignore: cast_nullable_to_non_nullable
+              as String,
+      recipient: freezed == recipient
           ? _value.recipient
           : recipient // ignore: cast_nullable_to_non_nullable
-              as String,
-      pioneer: null == pioneer
+              as SupabaseProfile?,
+      pioneer: freezed == pioneer
           ? _value.pioneer
           : pioneer // ignore: cast_nullable_to_non_nullable
-              as String,
+              as SupabaseProfile?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -914,8 +974,10 @@ class _$SupabaseConnectionImpl implements _SupabaseConnection {
   _$SupabaseConnectionImpl(
       {required this.id,
       @JsonKey(name: "created_at") required this.createdAt,
-      required this.recipient,
-      required this.pioneer,
+      @JsonKey(name: "recipient_id") required this.recipientId,
+      @JsonKey(name: "pioneer_id") required this.pioneerId,
+      this.recipient,
+      this.pioneer,
       required this.status});
 
   factory _$SupabaseConnectionImpl.fromJson(Map<String, dynamic> json) =>
@@ -927,15 +989,21 @@ class _$SupabaseConnectionImpl implements _SupabaseConnection {
   @JsonKey(name: "created_at")
   final DateTime createdAt;
   @override
-  final String recipient;
+  @JsonKey(name: "recipient_id")
+  final String recipientId;
   @override
-  final String pioneer;
+  @JsonKey(name: "pioneer_id")
+  final String pioneerId;
+  @override
+  final SupabaseProfile? recipient;
+  @override
+  final SupabaseProfile? pioneer;
   @override
   final SupabaseConnectionStatus status;
 
   @override
   String toString() {
-    return 'SupabaseConnection(id: $id, createdAt: $createdAt, recipient: $recipient, pioneer: $pioneer, status: $status)';
+    return 'SupabaseConnection(id: $id, createdAt: $createdAt, recipientId: $recipientId, pioneerId: $pioneerId, recipient: $recipient, pioneer: $pioneer, status: $status)';
   }
 
   @override
@@ -946,6 +1014,10 @@ class _$SupabaseConnectionImpl implements _SupabaseConnection {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
+            (identical(other.recipientId, recipientId) ||
+                other.recipientId == recipientId) &&
+            (identical(other.pioneerId, pioneerId) ||
+                other.pioneerId == pioneerId) &&
             (identical(other.recipient, recipient) ||
                 other.recipient == recipient) &&
             (identical(other.pioneer, pioneer) || other.pioneer == pioneer) &&
@@ -954,8 +1026,8 @@ class _$SupabaseConnectionImpl implements _SupabaseConnection {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, createdAt, recipient, pioneer, status);
+  int get hashCode => Object.hash(runtimeType, id, createdAt, recipientId,
+      pioneerId, recipient, pioneer, status);
 
   @JsonKey(ignore: true)
   @override
@@ -976,8 +1048,10 @@ abstract class _SupabaseConnection implements SupabaseConnection {
   factory _SupabaseConnection(
           {required final String id,
           @JsonKey(name: "created_at") required final DateTime createdAt,
-          required final String recipient,
-          required final String pioneer,
+          @JsonKey(name: "recipient_id") required final String recipientId,
+          @JsonKey(name: "pioneer_id") required final String pioneerId,
+          final SupabaseProfile? recipient,
+          final SupabaseProfile? pioneer,
           required final SupabaseConnectionStatus status}) =
       _$SupabaseConnectionImpl;
 
@@ -990,9 +1064,15 @@ abstract class _SupabaseConnection implements SupabaseConnection {
   @JsonKey(name: "created_at")
   DateTime get createdAt;
   @override
-  String get recipient;
+  @JsonKey(name: "recipient_id")
+  String get recipientId;
   @override
-  String get pioneer;
+  @JsonKey(name: "pioneer_id")
+  String get pioneerId;
+  @override
+  SupabaseProfile? get recipient;
+  @override
+  SupabaseProfile? get pioneer;
   @override
   SupabaseConnectionStatus get status;
   @override

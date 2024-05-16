@@ -1,9 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mess/collections/icons.dart';
+import 'package:mess/modules/profile/profile_tile.dart';
+import 'package:mess/pages/add_friends/pending_connections/pending_connections.dart';
 import 'package:mess/providers/supabase/connections/pending.dart';
 import 'package:mess/providers/supabase/profile/find.dart';
 
@@ -26,6 +28,15 @@ class AddFriendsPage extends HookConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("New connection"),
+        actions: [
+          IconButton(
+            icon: const Icon(AppIcons.deliveryDone),
+            onPressed: () {
+              context.pushNamed(PendingConnectionsPage.name);
+            },
+          ),
+          const Gap(5),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -70,22 +81,10 @@ class AddFriendsPage extends HookConsumerWidget {
                   AsyncData(:final value) => Builder(builder: (context) {
                       if (value == null) return const SizedBox.shrink();
                       final alreadySent = pendingConnections
-                          .any((s) => s.recipient == value.userId);
+                          .any((s) => s.recipientId == value.id);
 
-                      return ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: value.avatarUrl == null
-                              ? null
-                              : CachedNetworkImageProvider(
-                                  value.avatarUrl ?? "",
-                                ),
-                          child: value.avatarUrl == null
-                              ? const Icon(AppIcons.person)
-                              : null,
-                        ),
-                        title: Text("${value.firstName} ${value.lastName}"),
-                        subtitle:
-                            value.status == null ? null : Text(value.status!),
+                      return ProfileTile(
+                        profile: value,
                         trailing: alreadySent
                             ? Icon(AppIcons.deliveryDone,
                                 color: colorScheme.primary)
@@ -95,7 +94,7 @@ class AddFriendsPage extends HookConsumerWidget {
                             ? null
                             : () async {
                                 await pendingConnectionsNotifier
-                                    .create(value.userId);
+                                    .create(value.id);
                               },
                       );
                     }),

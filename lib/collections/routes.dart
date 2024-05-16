@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mess/pages/add_friends/add_friends.dart';
+import 'package:mess/pages/add_friends/pending_connections/pending_connections.dart';
 import 'package:mess/pages/login/login.dart';
 import 'package:mess/pages/login/profile/profile.dart';
 import 'package:mess/pages/settings/settings.dart';
@@ -95,6 +96,13 @@ final routerProvider = Provider((ref) {
         name: AddFriendsPage.name,
         parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const AddFriendsPage(),
+        routes: [
+          GoRoute(
+            path: "pending-connections",
+            name: PendingConnectionsPage.name,
+            builder: (context, state) => const PendingConnectionsPage(),
+          ),
+        ],
       ),
     ],
   );

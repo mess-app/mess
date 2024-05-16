@@ -75,8 +75,14 @@ _$SupabaseConnectionImpl _$$SupabaseConnectionImplFromJson(
     _$SupabaseConnectionImpl(
       id: json['id'] as String,
       createdAt: DateTime.parse(json['created_at'] as String),
-      recipient: json['recipient'] as String,
-      pioneer: json['pioneer'] as String,
+      recipientId: json['recipient_id'] as String,
+      pioneerId: json['pioneer_id'] as String,
+      recipient: json['recipient'] == null
+          ? null
+          : SupabaseProfile.fromJson(json['recipient'] as Map<String, dynamic>),
+      pioneer: json['pioneer'] == null
+          ? null
+          : SupabaseProfile.fromJson(json['pioneer'] as Map<String, dynamic>),
       status: $enumDecode(_$SupabaseConnectionStatusEnumMap, json['status']),
     );
 
@@ -85,6 +91,8 @@ Map<String, dynamic> _$$SupabaseConnectionImplToJson(
     <String, dynamic>{
       'id': instance.id,
       'created_at': instance.createdAt.toIso8601String(),
+      'recipient_id': instance.recipientId,
+      'pioneer_id': instance.pioneerId,
       'recipient': instance.recipient,
       'pioneer': instance.pioneer,
       'status': _$SupabaseConnectionStatusEnumMap[instance.status]!,

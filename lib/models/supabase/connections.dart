@@ -11,8 +11,10 @@ class SupabaseConnection with _$SupabaseConnection {
   factory SupabaseConnection({
     required String id,
     @JsonKey(name: "created_at") required DateTime createdAt,
-    required String recipient,
-    required String pioneer,
+    @JsonKey(name: "recipient_id") required String recipientId,
+    @JsonKey(name: "pioneer_id") required String pioneerId,
+    SupabaseProfile? recipient,
+    SupabaseProfile? pioneer,
     required SupabaseConnectionStatus status,
   }) = _SupabaseConnection;
 

@@ -3,33 +3,40 @@ import 'dart:async';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mess/collections/supabase.dart';
 import 'package:mess/models/models.dart';
+import 'package:mess/providers/supabase/profile/profile.dart';
 import 'package:mess/services/supabase/supabase.dart';
 
 class PendingConnectionsNotifier
     extends AsyncNotifier<List<SupabaseConnection>> {
   @override
-  FutureOr<List<SupabaseConnection>> build() async {
+  build() async {
+    final userProfile = await ref.watch(userProfileProvider.future);
+
     final connections = await supabaseService.client
         .from(SupabaseTables.connections)
-        .select("*")
+        .select(
+          "*, recipient:${SupabaseTables.profile}!public_connections_recipient_id_fkey(*)",
+        )
         .eq("status", SupabaseConnectionStatus.pending.name)
-        .eq("pioneer", supabaseService.user!.id)
+        .eq("pioneer_id", userProfile!.id)
         .withConverter((data) => data.map(SupabaseConnection.fromJson));
-    return connections.toList();
+    return connections.toList().cast<SupabaseConnection>();
   }
 
-  Future<void> create(String recipient) async {
+  Future<void> create(String recipientId) async {
     final alreadyExists =
-        state.asData?.value.any((s) => s.pioneer == recipient);
+        state.asData?.value.any((s) => s.pioneerId == recipientId);
     if (state.asData?.value == null || alreadyExists!) return;
+
+    final userProfile = await ref.read(userProfileProvider.future);
 
     await update((state) async {
       try {
         final newConnection = await supabaseService.client
             .from(SupabaseTables.connections)
             .insert({
-              "pioneer": supabaseService.user!.id,
-              "recipient": recipient,
+              "pioneer_id": userProfile!.id,
+              "recipient_id": recipientId,
             })
             .select()
             .single()

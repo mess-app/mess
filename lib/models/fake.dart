@@ -9,4 +9,14 @@ class Fake {
     avatarUrl: "https://avatars.githubusercontent.com/u/44116043?v=4",
     username: "testuser",
   );
+
+  static final connection = SupabaseConnection(
+    id: "id",
+    createdAt: DateTime.now(),
+    pioneerId: "pioneer",
+    recipientId: "recipient",
+    pioneer: profile,
+    recipient: profile,
+    status: SupabaseConnectionStatus.pending,
+  );
 }
