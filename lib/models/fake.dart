@@ -7,5 +7,6 @@ class Fake {
     lastName: "Last",
     userId: "2330-912-213-2132",
     avatarUrl: "https://avatars.githubusercontent.com/u/44116043?v=4",
+    username: "testuser",
   );
 }

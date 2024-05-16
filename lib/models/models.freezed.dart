@@ -30,6 +30,7 @@ mixin _$SupabaseProfile {
   String? get status => throw _privateConstructorUsedError;
   @JsonKey(name: "user_id")
   String get userId => throw _privateConstructorUsedError;
+  String get username => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +50,8 @@ abstract class $SupabaseProfileCopyWith<$Res> {
       @JsonKey(name: "last_name") String? lastName,
       @JsonKey(name: "avatar_url") String? avatarUrl,
       String? status,
-      @JsonKey(name: "user_id") String userId});
+      @JsonKey(name: "user_id") String userId,
+      String username});
 }
 
 /// @nodoc
@@ -71,6 +73,7 @@ class _$SupabaseProfileCopyWithImpl<$Res, $Val extends SupabaseProfile>
     Object? avatarUrl = freezed,
     Object? status = freezed,
     Object? userId = null,
+    Object? username = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -97,6 +100,10 @@ class _$SupabaseProfileCopyWithImpl<$Res, $Val extends SupabaseProfile>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -115,7 +122,8 @@ abstract class _$$SupabaseProfileImplCopyWith<$Res>
       @JsonKey(name: "last_name") String? lastName,
       @JsonKey(name: "avatar_url") String? avatarUrl,
       String? status,
-      @JsonKey(name: "user_id") String userId});
+      @JsonKey(name: "user_id") String userId,
+      String username});
 }
 
 /// @nodoc
@@ -135,6 +143,7 @@ class __$$SupabaseProfileImplCopyWithImpl<$Res>
     Object? avatarUrl = freezed,
     Object? status = freezed,
     Object? userId = null,
+    Object? username = null,
   }) {
     return _then(_$SupabaseProfileImpl(
       id: null == id
@@ -161,6 +170,10 @@ class __$$SupabaseProfileImplCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -174,7 +187,8 @@ class _$SupabaseProfileImpl implements _SupabaseProfile {
       @JsonKey(name: "last_name") this.lastName,
       @JsonKey(name: "avatar_url") this.avatarUrl,
       this.status,
-      @JsonKey(name: "user_id") required this.userId});
+      @JsonKey(name: "user_id") required this.userId,
+      required this.username});
 
   factory _$SupabaseProfileImpl.fromJson(Map<String, dynamic> json) =>
       _$$SupabaseProfileImplFromJson(json);
@@ -195,10 +209,12 @@ class _$SupabaseProfileImpl implements _SupabaseProfile {
   @override
   @JsonKey(name: "user_id")
   final String userId;
+  @override
+  final String username;
 
   @override
   String toString() {
-    return 'SupabaseProfile(id: $id, firstName: $firstName, lastName: $lastName, avatarUrl: $avatarUrl, status: $status, userId: $userId)';
+    return 'SupabaseProfile(id: $id, firstName: $firstName, lastName: $lastName, avatarUrl: $avatarUrl, status: $status, userId: $userId, username: $username)';
   }
 
   @override
@@ -214,13 +230,15 @@ class _$SupabaseProfileImpl implements _SupabaseProfile {
             (identical(other.avatarUrl, avatarUrl) ||
                 other.avatarUrl == avatarUrl) &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.userId, userId) || other.userId == userId));
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.username, username) ||
+                other.username == username));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, firstName, lastName, avatarUrl, status, userId);
+  int get hashCode => Object.hash(runtimeType, id, firstName, lastName,
+      avatarUrl, status, userId, username);
 
   @JsonKey(ignore: true)
   @override
@@ -239,13 +257,13 @@ class _$SupabaseProfileImpl implements _SupabaseProfile {
 
 abstract class _SupabaseProfile implements SupabaseProfile {
   factory _SupabaseProfile(
-          {required final String id,
-          @JsonKey(name: "first_name") required final String firstName,
-          @JsonKey(name: "last_name") final String? lastName,
-          @JsonKey(name: "avatar_url") final String? avatarUrl,
-          final String? status,
-          @JsonKey(name: "user_id") required final String userId}) =
-      _$SupabaseProfileImpl;
+      {required final String id,
+      @JsonKey(name: "first_name") required final String firstName,
+      @JsonKey(name: "last_name") final String? lastName,
+      @JsonKey(name: "avatar_url") final String? avatarUrl,
+      final String? status,
+      @JsonKey(name: "user_id") required final String userId,
+      required final String username}) = _$SupabaseProfileImpl;
 
   factory _SupabaseProfile.fromJson(Map<String, dynamic> json) =
       _$SupabaseProfileImpl.fromJson;
@@ -266,6 +284,8 @@ abstract class _SupabaseProfile implements SupabaseProfile {
   @override
   @JsonKey(name: "user_id")
   String get userId;
+  @override
+  String get username;
   @override
   @JsonKey(ignore: true)
   _$$SupabaseProfileImplCopyWith<_$SupabaseProfileImpl> get copyWith =>

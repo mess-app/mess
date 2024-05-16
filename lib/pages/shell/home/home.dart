@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mess/collections/icons.dart';
 import 'package:mess/modules/home/sections/profile.dart';
+import 'package:mess/pages/add_friends/add_friends.dart';
+import 'package:mess/pages/settings/settings.dart';
 
 class HomePage extends HookConsumerWidget {
   static const name = "home";
@@ -21,11 +24,15 @@ class HomePage extends HookConsumerWidget {
         actions: [
           IconButton(
             icon: const Icon(AppIcons.personAdd),
-            onPressed: () {},
+            onPressed: () {
+              context.pushNamed(AddFriendsPage.name);
+            },
           ),
           IconButton(
             icon: const Icon(AppIcons.settings),
-            onPressed: () {},
+            onPressed: () {
+              context.pushNamed(SettingsPage.name);
+            },
           ),
         ],
       ),

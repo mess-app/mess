@@ -9,6 +9,7 @@ class SupabaseProfile with _$SupabaseProfile {
     @JsonKey(name: "avatar_url") String? avatarUrl,
     String? status,
     @JsonKey(name: "user_id") required String userId,
+    required String username,
   }) = _SupabaseProfile;
 
   factory SupabaseProfile.fromJson(Map<String, dynamic> json) =>

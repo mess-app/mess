@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mess/pages/add_friends/add_friends.dart';
 import 'package:mess/pages/login/login.dart';
 import 'package:mess/pages/login/profile/profile.dart';
 import 'package:mess/pages/settings/settings.dart';
@@ -61,7 +62,7 @@ final routerProvider = Provider((ref) {
 
           if (supabaseService.user != null && profile != null) {
             return "/";
-          } else if (profile == null) {
+          } else if (supabaseService.user != null && profile == null) {
             return "/login/profile";
           }
 
@@ -88,6 +89,12 @@ final routerProvider = Provider((ref) {
             builder: (context, state) => const LoginProfilePage(),
           ),
         ],
+      ),
+      GoRoute(
+        path: "/add-friends",
+        name: AddFriendsPage.name,
+        parentNavigatorKey: rootNavigatorKey,
+        builder: (context, state) => const AddFriendsPage(),
       ),
     ],
   );

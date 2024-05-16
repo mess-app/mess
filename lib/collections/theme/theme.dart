@@ -52,7 +52,7 @@ final lightColorScheme = ColorScheme.light(
 final darkColorScheme = ColorScheme.dark(
   primary: Color(brandColorsDark.olivine),
   primaryContainer: Color(brandColorsDark.ashGray),
-  onPrimary: Colors.grey[100]!,
+  onPrimary: Colors.grey[700]!,
   onPrimaryContainer: Colors.grey[800]!,
   secondary: Color(brandColorsDark.englishViolet),
   secondaryContainer: Color(brandColorsDark.battleshipGray),
@@ -97,6 +97,7 @@ ThemeData buildTheme(Brightness brightness) {
       shadowColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
       color: colorScheme.background,
+      titleSpacing: 2,
     ),
     searchBarTheme: SearchBarThemeData(
       shape: const MaterialStatePropertyAll(

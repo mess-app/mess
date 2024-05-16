@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mess/pages/login/profile/profile.dart';
 import 'package:mess/services/supabase/supabase.dart';
 import 'package:sign_in_button/sign_in_button.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginPage extends HookConsumerWidget {
   static const name = "login";
@@ -43,7 +44,10 @@ class LoginPage extends HookConsumerWidget {
               onPressed: () async {
                 await supabaseService.signInWithGoogle();
 
-                if (supabaseService.user != null && context.mounted) {
+                await supabaseService.onAuthStateChanged.firstWhere((event) {
+                  return event.event == AuthChangeEvent.signedIn;
+                });
+                if (context.mounted) {
                   context.goNamed(LoginProfilePage.name);
                 }
               },

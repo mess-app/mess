@@ -15,6 +15,8 @@ class UserProfileNotifier extends AsyncNotifier<SupabaseProfile?> {
       if (event.event == AuthChangeEvent.signedIn &&
           state.asData?.value == null) {
         ref.invalidateSelf();
+      } else if (event.event == AuthChangeEvent.signedOut) {
+        state = const AsyncData(null);
       }
     });
   }
@@ -29,6 +31,7 @@ class UserProfileNotifier extends AsyncNotifier<SupabaseProfile?> {
       final profile = await supabaseService.client
           .from(SupabaseTables.profile)
           .select("*")
+          .eq("user_id", supabaseService.user!.id)
           .single()
           .withConverter<SupabaseProfile>(SupabaseProfile.fromJson);
 

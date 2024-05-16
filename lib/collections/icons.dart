@@ -11,6 +11,11 @@ class AppIcons {
   static const arrowRight = Bootstrap.arrow_right;
   static const search = Bootstrap.search;
   static const person = Bootstrap.person;
+  static const chevronRight = EvaIcons.chevron_right;
+  static const signOut = Bootstrap.box_arrow_right;
+  static const warning = Bootstrap.exclamation_triangle;
+  static const palette = Bootstrap.palette;
+  static const clear = Bootstrap.x;
 
   static const homeFilled = Bootstrap.house_fill;
   static const chatsFilled = Bootstrap.chat_fill;
