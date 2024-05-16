@@ -156,5 +156,9 @@ ThemeData buildTheme(Brightness brightness) {
         ),
       ),
     ),
+    listTileTheme: const ListTileThemeData(
+      shape: RoundedRectangleBorder(borderRadius: defaultBorderRadius),
+      contentPadding: EdgeInsets.symmetric(horizontal: 3, vertical: 4),
+    ),
   );
 }

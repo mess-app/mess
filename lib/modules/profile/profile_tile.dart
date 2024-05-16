@@ -6,15 +6,19 @@ import 'package:mess/models/models.dart';
 class ProfileTile extends StatelessWidget {
   final SupabaseProfile profile;
 
+  final Widget? subtitle;
   final Widget? trailing;
   final bool selected;
   final VoidCallback? onTap;
+  final bool isThreeLine;
   const ProfileTile({
     super.key,
     required this.profile,
+    this.subtitle,
     this.trailing,
     this.selected = false,
     this.onTap,
+    this.isThreeLine = false,
   });
 
   @override
@@ -29,10 +33,12 @@ class ProfileTile extends StatelessWidget {
         child: profile.avatarUrl == null ? const Icon(AppIcons.person) : null,
       ),
       title: Text("${profile.firstName} ${profile.lastName}"),
-      subtitle: profile.status == null ? null : Text(profile.status!),
+      subtitle:
+          subtitle ?? (profile.status == null ? null : Text(profile.status!)),
       trailing: trailing,
       selected: selected,
       onTap: selected ? null : onTap,
+      isThreeLine: isThreeLine,
     );
   }
 }
