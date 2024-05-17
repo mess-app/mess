@@ -27,6 +27,8 @@ class UserProfileNotifier extends AsyncNotifier<SupabaseProfile?> {
       _subscription?.cancel();
     });
 
+    if (supabaseService.user == null) return null;
+
     try {
       final profile = await supabaseService.client
           .from(SupabaseTables.profile)
