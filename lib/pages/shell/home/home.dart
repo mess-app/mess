@@ -50,6 +50,8 @@ class HomePage extends HookConsumerWidget {
           slivers: [
             SliverList.list(
               children: [
+                const HomePageProfileSection(),
+                const Gap(16),
                 SearchAnchor(
                   suggestionsBuilder: (context, controller) {
                     return [];
@@ -62,8 +64,6 @@ class HomePage extends HookConsumerWidget {
                     );
                   },
                 ),
-                const Gap(16),
-                const HomePageProfileSection()
               ],
             ),
           ],

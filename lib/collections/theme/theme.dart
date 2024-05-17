@@ -10,7 +10,7 @@ const brandColors = (
 
 const brandColorsDark = (
   lightGray: 0xFF424242,
-  ashGray: 0xFF302F2F,
+  ashGray: 0xFF44493D,
   olivine: 0xFF9AEF7D,
   battleshipGray: 0xFF4D4D4D,
   englishViolet: 0xFF6A1B9A,
@@ -90,6 +90,7 @@ ThemeData buildTheme(Brightness brightness) {
 
   return ThemeData(
     colorScheme: colorScheme,
+    iconTheme: IconThemeData(opacity: 1, color: colorScheme.onBackground),
     appBarTheme: AppBarTheme(
       scrolledUnderElevation: 0,
       elevation: 0,
@@ -98,6 +99,7 @@ ThemeData buildTheme(Brightness brightness) {
       surfaceTintColor: Colors.transparent,
       color: colorScheme.background,
       titleSpacing: 2,
+      actionsIconTheme: const IconThemeData(opacity: 1),
     ),
     searchBarTheme: SearchBarThemeData(
       shape: const MaterialStatePropertyAll(
@@ -156,8 +158,9 @@ ThemeData buildTheme(Brightness brightness) {
         ),
       ),
     ),
-    listTileTheme: const ListTileThemeData(
-      shape: RoundedRectangleBorder(borderRadius: defaultBorderRadius),
+    listTileTheme: ListTileThemeData(
+      shape: const RoundedRectangleBorder(borderRadius: defaultBorderRadius),
+      iconColor: colorScheme.onBackground,
     ),
   );
 }

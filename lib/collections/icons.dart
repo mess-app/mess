@@ -19,6 +19,12 @@ class AppIcons {
   static const deliveryDone = Bootstrap.send_check;
   static const notifications = Bootstrap.bell;
   static const personCheck = Bootstrap.person_check;
+  static const hamBurger = Bootstrap.list;
+  static const call = Bootstrap.telephone;
+  static const plus = EvaIcons.plus;
+  static const video = Bootstrap.camera_video;
+  static const mic = Bootstrap.mic;
+  static const send = Bootstrap.cursor;
 
   static const homeFilled = Bootstrap.house_fill;
   static const chatsFilled = Bootstrap.chat_fill;

@@ -2,10 +2,12 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mess/collections/icons.dart';
 import 'package:mess/models/models.dart';
 import 'package:mess/modules/profile/profile_tile.dart';
+import 'package:mess/pages/shell/chats/chat/chat.dart';
 import 'package:mess/providers/supabase/connections/connections.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -57,7 +59,9 @@ class ChatsPage extends HookConsumerWidget {
                     subtitle: Text(
                       "Lol bro!",
                       style: textTheme.bodySmall?.copyWith(
-                        color: Random().nextBool() ? colorScheme.primary : colorScheme.outlineVariant,
+                        color: Random().nextBool()
+                            ? colorScheme.primary
+                            : colorScheme.outlineVariant,
                       ),
                     ),
                     trailing: Column(
@@ -74,7 +78,14 @@ class ChatsPage extends HookConsumerWidget {
                         ),
                       ],
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      context.pushNamed(
+                        ChatPage.name,
+                        pathParameters: {
+                          "username": connection.pioneer!.username
+                        },
+                      );
+                    },
                   );
                 },
               ),

@@ -7,6 +7,7 @@ import 'package:mess/pages/login/login.dart';
 import 'package:mess/pages/login/profile/profile.dart';
 import 'package:mess/pages/notifications/notifications.dart';
 import 'package:mess/pages/settings/settings.dart';
+import 'package:mess/pages/shell/chats/chat/chat.dart';
 import 'package:mess/pages/shell/chats/chats.dart';
 import 'package:mess/pages/shell/home/home.dart';
 import 'package:mess/pages/shell/shell.dart';
@@ -42,6 +43,18 @@ final routerProvider = Provider((ref) {
             path: "/chats",
             name: ChatsPage.name,
             builder: (context, state) => const ChatsPage(),
+            routes: [
+              GoRoute(
+                path: ":username",
+                name: ChatPage.name,
+                parentNavigatorKey: rootNavigatorKey,
+                builder: (context, state) {
+                  final username = state.pathParameters["username"]!;
+
+                  return ChatPage(username: username);
+                },
+              ),
+            ],
           ),
           GoRoute(
             path: "/store",
