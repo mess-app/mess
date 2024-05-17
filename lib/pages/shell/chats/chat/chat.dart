@@ -148,12 +148,14 @@ class ChatPage extends HookConsumerWidget {
                     AnimatedSwitcher(
                       duration: const Duration(milliseconds: 200),
                       child: isEditing.value
-                          ? IconButton.filled(
+                          ? IconButton(
                               icon: const Icon(AppIcons.send),
                               style: IconButton.styleFrom(
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(6),
                                 ),
+                                backgroundColor: colorScheme.primary,
+                                foregroundColor: colorScheme.onPrimary,
                               ),
                               onPressed: () {},
                             )
