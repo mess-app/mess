@@ -1548,3 +1548,706 @@ abstract class _SupabaseGroupConnection implements SupabaseGroupConnection {
   _$$SupabaseGroupConnectionImplCopyWith<_$SupabaseGroupConnectionImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
+
+WebsocketEvent _$WebsocketEventFromJson(Map<String, dynamic> json) {
+  switch (json['event']) {
+    case 'send_message':
+      return WebsocketSendMessageEvent.fromJson(json);
+    case 'receive_message':
+      return WebsocketReceiveMessageEvent.fromJson(json);
+
+    default:
+      throw CheckedFromJsonException(json, 'event', 'WebsocketEvent',
+          'Invalid union type "${json['event']}"!');
+  }
+}
+
+/// @nodoc
+mixin _$WebsocketEvent {
+  WebsocketEventType get event => throw _privateConstructorUsedError;
+  WebsocketMessageEventData get data => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            WebsocketEventType event, WebsocketMessageEventData data)
+        sendMessage,
+    required TResult Function(
+            WebsocketEventType event, WebsocketMessageEventData data)
+        receiveMessage,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(WebsocketEventType event, WebsocketMessageEventData data)?
+        sendMessage,
+    TResult? Function(WebsocketEventType event, WebsocketMessageEventData data)?
+        receiveMessage,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(WebsocketEventType event, WebsocketMessageEventData data)?
+        sendMessage,
+    TResult Function(WebsocketEventType event, WebsocketMessageEventData data)?
+        receiveMessage,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(WebsocketSendMessageEvent value) sendMessage,
+    required TResult Function(WebsocketReceiveMessageEvent value)
+        receiveMessage,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(WebsocketSendMessageEvent value)? sendMessage,
+    TResult? Function(WebsocketReceiveMessageEvent value)? receiveMessage,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(WebsocketSendMessageEvent value)? sendMessage,
+    TResult Function(WebsocketReceiveMessageEvent value)? receiveMessage,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $WebsocketEventCopyWith<WebsocketEvent> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $WebsocketEventCopyWith<$Res> {
+  factory $WebsocketEventCopyWith(
+          WebsocketEvent value, $Res Function(WebsocketEvent) then) =
+      _$WebsocketEventCopyWithImpl<$Res, WebsocketEvent>;
+  @useResult
+  $Res call({WebsocketEventType event, WebsocketMessageEventData data});
+
+  $WebsocketMessageEventDataCopyWith<$Res> get data;
+}
+
+/// @nodoc
+class _$WebsocketEventCopyWithImpl<$Res, $Val extends WebsocketEvent>
+    implements $WebsocketEventCopyWith<$Res> {
+  _$WebsocketEventCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? event = null,
+    Object? data = null,
+  }) {
+    return _then(_value.copyWith(
+      event: null == event
+          ? _value.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as WebsocketEventType,
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as WebsocketMessageEventData,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $WebsocketMessageEventDataCopyWith<$Res> get data {
+    return $WebsocketMessageEventDataCopyWith<$Res>(_value.data, (value) {
+      return _then(_value.copyWith(data: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$WebsocketSendMessageEventImplCopyWith<$Res>
+    implements $WebsocketEventCopyWith<$Res> {
+  factory _$$WebsocketSendMessageEventImplCopyWith(
+          _$WebsocketSendMessageEventImpl value,
+          $Res Function(_$WebsocketSendMessageEventImpl) then) =
+      __$$WebsocketSendMessageEventImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({WebsocketEventType event, WebsocketMessageEventData data});
+
+  @override
+  $WebsocketMessageEventDataCopyWith<$Res> get data;
+}
+
+/// @nodoc
+class __$$WebsocketSendMessageEventImplCopyWithImpl<$Res>
+    extends _$WebsocketEventCopyWithImpl<$Res, _$WebsocketSendMessageEventImpl>
+    implements _$$WebsocketSendMessageEventImplCopyWith<$Res> {
+  __$$WebsocketSendMessageEventImplCopyWithImpl(
+      _$WebsocketSendMessageEventImpl _value,
+      $Res Function(_$WebsocketSendMessageEventImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? event = null,
+    Object? data = null,
+  }) {
+    return _then(_$WebsocketSendMessageEventImpl(
+      event: null == event
+          ? _value.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as WebsocketEventType,
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as WebsocketMessageEventData,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$WebsocketSendMessageEventImpl implements WebsocketSendMessageEvent {
+  const _$WebsocketSendMessageEventImpl(
+      {required this.event, required this.data});
+
+  factory _$WebsocketSendMessageEventImpl.fromJson(Map<String, dynamic> json) =>
+      _$$WebsocketSendMessageEventImplFromJson(json);
+
+  @override
+  final WebsocketEventType event;
+  @override
+  final WebsocketMessageEventData data;
+
+  @override
+  String toString() {
+    return 'WebsocketEvent.sendMessage(event: $event, data: $data)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$WebsocketSendMessageEventImpl &&
+            (identical(other.event, event) || other.event == event) &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, event, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$WebsocketSendMessageEventImplCopyWith<_$WebsocketSendMessageEventImpl>
+      get copyWith => __$$WebsocketSendMessageEventImplCopyWithImpl<
+          _$WebsocketSendMessageEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            WebsocketEventType event, WebsocketMessageEventData data)
+        sendMessage,
+    required TResult Function(
+            WebsocketEventType event, WebsocketMessageEventData data)
+        receiveMessage,
+  }) {
+    return sendMessage(event, data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(WebsocketEventType event, WebsocketMessageEventData data)?
+        sendMessage,
+    TResult? Function(WebsocketEventType event, WebsocketMessageEventData data)?
+        receiveMessage,
+  }) {
+    return sendMessage?.call(event, data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(WebsocketEventType event, WebsocketMessageEventData data)?
+        sendMessage,
+    TResult Function(WebsocketEventType event, WebsocketMessageEventData data)?
+        receiveMessage,
+    required TResult orElse(),
+  }) {
+    if (sendMessage != null) {
+      return sendMessage(event, data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(WebsocketSendMessageEvent value) sendMessage,
+    required TResult Function(WebsocketReceiveMessageEvent value)
+        receiveMessage,
+  }) {
+    return sendMessage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(WebsocketSendMessageEvent value)? sendMessage,
+    TResult? Function(WebsocketReceiveMessageEvent value)? receiveMessage,
+  }) {
+    return sendMessage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(WebsocketSendMessageEvent value)? sendMessage,
+    TResult Function(WebsocketReceiveMessageEvent value)? receiveMessage,
+    required TResult orElse(),
+  }) {
+    if (sendMessage != null) {
+      return sendMessage(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$WebsocketSendMessageEventImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class WebsocketSendMessageEvent implements WebsocketEvent {
+  const factory WebsocketSendMessageEvent(
+          {required final WebsocketEventType event,
+          required final WebsocketMessageEventData data}) =
+      _$WebsocketSendMessageEventImpl;
+
+  factory WebsocketSendMessageEvent.fromJson(Map<String, dynamic> json) =
+      _$WebsocketSendMessageEventImpl.fromJson;
+
+  @override
+  WebsocketEventType get event;
+  @override
+  WebsocketMessageEventData get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$WebsocketSendMessageEventImplCopyWith<_$WebsocketSendMessageEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$WebsocketReceiveMessageEventImplCopyWith<$Res>
+    implements $WebsocketEventCopyWith<$Res> {
+  factory _$$WebsocketReceiveMessageEventImplCopyWith(
+          _$WebsocketReceiveMessageEventImpl value,
+          $Res Function(_$WebsocketReceiveMessageEventImpl) then) =
+      __$$WebsocketReceiveMessageEventImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({WebsocketEventType event, WebsocketMessageEventData data});
+
+  @override
+  $WebsocketMessageEventDataCopyWith<$Res> get data;
+}
+
+/// @nodoc
+class __$$WebsocketReceiveMessageEventImplCopyWithImpl<$Res>
+    extends _$WebsocketEventCopyWithImpl<$Res,
+        _$WebsocketReceiveMessageEventImpl>
+    implements _$$WebsocketReceiveMessageEventImplCopyWith<$Res> {
+  __$$WebsocketReceiveMessageEventImplCopyWithImpl(
+      _$WebsocketReceiveMessageEventImpl _value,
+      $Res Function(_$WebsocketReceiveMessageEventImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? event = null,
+    Object? data = null,
+  }) {
+    return _then(_$WebsocketReceiveMessageEventImpl(
+      event: null == event
+          ? _value.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as WebsocketEventType,
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as WebsocketMessageEventData,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$WebsocketReceiveMessageEventImpl
+    implements WebsocketReceiveMessageEvent {
+  const _$WebsocketReceiveMessageEventImpl(
+      {required this.event, required this.data});
+
+  factory _$WebsocketReceiveMessageEventImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$WebsocketReceiveMessageEventImplFromJson(json);
+
+  @override
+  final WebsocketEventType event;
+  @override
+  final WebsocketMessageEventData data;
+
+  @override
+  String toString() {
+    return 'WebsocketEvent.receiveMessage(event: $event, data: $data)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$WebsocketReceiveMessageEventImpl &&
+            (identical(other.event, event) || other.event == event) &&
+            (identical(other.data, data) || other.data == data));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, event, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$WebsocketReceiveMessageEventImplCopyWith<
+          _$WebsocketReceiveMessageEventImpl>
+      get copyWith => __$$WebsocketReceiveMessageEventImplCopyWithImpl<
+          _$WebsocketReceiveMessageEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            WebsocketEventType event, WebsocketMessageEventData data)
+        sendMessage,
+    required TResult Function(
+            WebsocketEventType event, WebsocketMessageEventData data)
+        receiveMessage,
+  }) {
+    return receiveMessage(event, data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(WebsocketEventType event, WebsocketMessageEventData data)?
+        sendMessage,
+    TResult? Function(WebsocketEventType event, WebsocketMessageEventData data)?
+        receiveMessage,
+  }) {
+    return receiveMessage?.call(event, data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(WebsocketEventType event, WebsocketMessageEventData data)?
+        sendMessage,
+    TResult Function(WebsocketEventType event, WebsocketMessageEventData data)?
+        receiveMessage,
+    required TResult orElse(),
+  }) {
+    if (receiveMessage != null) {
+      return receiveMessage(event, data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(WebsocketSendMessageEvent value) sendMessage,
+    required TResult Function(WebsocketReceiveMessageEvent value)
+        receiveMessage,
+  }) {
+    return receiveMessage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(WebsocketSendMessageEvent value)? sendMessage,
+    TResult? Function(WebsocketReceiveMessageEvent value)? receiveMessage,
+  }) {
+    return receiveMessage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(WebsocketSendMessageEvent value)? sendMessage,
+    TResult Function(WebsocketReceiveMessageEvent value)? receiveMessage,
+    required TResult orElse(),
+  }) {
+    if (receiveMessage != null) {
+      return receiveMessage(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$WebsocketReceiveMessageEventImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class WebsocketReceiveMessageEvent implements WebsocketEvent {
+  const factory WebsocketReceiveMessageEvent(
+          {required final WebsocketEventType event,
+          required final WebsocketMessageEventData data}) =
+      _$WebsocketReceiveMessageEventImpl;
+
+  factory WebsocketReceiveMessageEvent.fromJson(Map<String, dynamic> json) =
+      _$WebsocketReceiveMessageEventImpl.fromJson;
+
+  @override
+  WebsocketEventType get event;
+  @override
+  WebsocketMessageEventData get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$WebsocketReceiveMessageEventImplCopyWith<
+          _$WebsocketReceiveMessageEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+WebsocketMessageEventData _$WebsocketMessageEventDataFromJson(
+    Map<String, dynamic> json) {
+  return _WebsocketMessageEventData.fromJson(json);
+}
+
+/// @nodoc
+mixin _$WebsocketMessageEventData {
+  @JsonKey(name: 'connection_id')
+  String get connectionId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'recipient_id')
+  String get recipientId => throw _privateConstructorUsedError;
+  String get message => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  DateTime get createdAt => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $WebsocketMessageEventDataCopyWith<WebsocketMessageEventData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $WebsocketMessageEventDataCopyWith<$Res> {
+  factory $WebsocketMessageEventDataCopyWith(WebsocketMessageEventData value,
+          $Res Function(WebsocketMessageEventData) then) =
+      _$WebsocketMessageEventDataCopyWithImpl<$Res, WebsocketMessageEventData>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'connection_id') String connectionId,
+      @JsonKey(name: 'recipient_id') String recipientId,
+      String message,
+      @JsonKey(name: 'created_at') DateTime createdAt});
+}
+
+/// @nodoc
+class _$WebsocketMessageEventDataCopyWithImpl<$Res,
+        $Val extends WebsocketMessageEventData>
+    implements $WebsocketMessageEventDataCopyWith<$Res> {
+  _$WebsocketMessageEventDataCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? connectionId = null,
+    Object? recipientId = null,
+    Object? message = null,
+    Object? createdAt = null,
+  }) {
+    return _then(_value.copyWith(
+      connectionId: null == connectionId
+          ? _value.connectionId
+          : connectionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      recipientId: null == recipientId
+          ? _value.recipientId
+          : recipientId // ignore: cast_nullable_to_non_nullable
+              as String,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$WebsocketMessageEventDataImplCopyWith<$Res>
+    implements $WebsocketMessageEventDataCopyWith<$Res> {
+  factory _$$WebsocketMessageEventDataImplCopyWith(
+          _$WebsocketMessageEventDataImpl value,
+          $Res Function(_$WebsocketMessageEventDataImpl) then) =
+      __$$WebsocketMessageEventDataImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'connection_id') String connectionId,
+      @JsonKey(name: 'recipient_id') String recipientId,
+      String message,
+      @JsonKey(name: 'created_at') DateTime createdAt});
+}
+
+/// @nodoc
+class __$$WebsocketMessageEventDataImplCopyWithImpl<$Res>
+    extends _$WebsocketMessageEventDataCopyWithImpl<$Res,
+        _$WebsocketMessageEventDataImpl>
+    implements _$$WebsocketMessageEventDataImplCopyWith<$Res> {
+  __$$WebsocketMessageEventDataImplCopyWithImpl(
+      _$WebsocketMessageEventDataImpl _value,
+      $Res Function(_$WebsocketMessageEventDataImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? connectionId = null,
+    Object? recipientId = null,
+    Object? message = null,
+    Object? createdAt = null,
+  }) {
+    return _then(_$WebsocketMessageEventDataImpl(
+      connectionId: null == connectionId
+          ? _value.connectionId
+          : connectionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      recipientId: null == recipientId
+          ? _value.recipientId
+          : recipientId // ignore: cast_nullable_to_non_nullable
+              as String,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$WebsocketMessageEventDataImpl implements _WebsocketMessageEventData {
+  _$WebsocketMessageEventDataImpl(
+      {@JsonKey(name: 'connection_id') required this.connectionId,
+      @JsonKey(name: 'recipient_id') required this.recipientId,
+      required this.message,
+      @JsonKey(name: 'created_at') required this.createdAt});
+
+  factory _$WebsocketMessageEventDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$WebsocketMessageEventDataImplFromJson(json);
+
+  @override
+  @JsonKey(name: 'connection_id')
+  final String connectionId;
+  @override
+  @JsonKey(name: 'recipient_id')
+  final String recipientId;
+  @override
+  final String message;
+  @override
+  @JsonKey(name: 'created_at')
+  final DateTime createdAt;
+
+  @override
+  String toString() {
+    return 'WebsocketMessageEventData(connectionId: $connectionId, recipientId: $recipientId, message: $message, createdAt: $createdAt)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$WebsocketMessageEventDataImpl &&
+            (identical(other.connectionId, connectionId) ||
+                other.connectionId == connectionId) &&
+            (identical(other.recipientId, recipientId) ||
+                other.recipientId == recipientId) &&
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, connectionId, recipientId, message, createdAt);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$WebsocketMessageEventDataImplCopyWith<_$WebsocketMessageEventDataImpl>
+      get copyWith => __$$WebsocketMessageEventDataImplCopyWithImpl<
+          _$WebsocketMessageEventDataImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$WebsocketMessageEventDataImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _WebsocketMessageEventData implements WebsocketMessageEventData {
+  factory _WebsocketMessageEventData(
+          {@JsonKey(name: 'connection_id') required final String connectionId,
+          @JsonKey(name: 'recipient_id') required final String recipientId,
+          required final String message,
+          @JsonKey(name: 'created_at') required final DateTime createdAt}) =
+      _$WebsocketMessageEventDataImpl;
+
+  factory _WebsocketMessageEventData.fromJson(Map<String, dynamic> json) =
+      _$WebsocketMessageEventDataImpl.fromJson;
+
+  @override
+  @JsonKey(name: 'connection_id')
+  String get connectionId;
+  @override
+  @JsonKey(name: 'recipient_id')
+  String get recipientId;
+  @override
+  String get message;
+  @override
+  @JsonKey(name: 'created_at')
+  DateTime get createdAt;
+  @override
+  @JsonKey(ignore: true)
+  _$$WebsocketMessageEventDataImplCopyWith<_$WebsocketMessageEventDataImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}

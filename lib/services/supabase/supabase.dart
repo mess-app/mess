@@ -28,6 +28,9 @@ class SupabaseService {
   Session? get session => Supabase.instance.client.auth.currentSession;
   User? get user => session?.user;
 
+  String get redirectUri =>
+      kIsWeb ? Uri.base.replace(path: "/").toString() : Env.loginCallbackUrl;
+
   Future<void> signInWithApple() async {
     if (kIsMacOS || kIsIOS) {
       final rawNonce = client.auth.generateRawNonce();
@@ -55,7 +58,7 @@ class SupabaseService {
     } else {
       await client.auth.signInWithOAuth(
         OAuthProvider.apple,
-        redirectTo: Env.loginCallbackUrl,
+        redirectTo: redirectUri,
       );
     }
   }
@@ -86,7 +89,7 @@ class SupabaseService {
     } else {
       await client.auth.signInWithOAuth(
         OAuthProvider.google,
-        redirectTo: Env.loginCallbackUrl,
+        redirectTo: redirectUri,
       );
     }
   }

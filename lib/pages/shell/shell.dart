@@ -7,6 +7,7 @@ import 'package:mess/collections/icons.dart';
 import 'package:mess/pages/shell/chats/chats.dart';
 import 'package:mess/pages/shell/home/home.dart';
 import 'package:mess/pages/shell/store/store.dart';
+import 'package:mess/providers/websocket/websocket.dart';
 
 const routeItems = [
   (
@@ -40,6 +41,8 @@ class ShellPage extends HookConsumerWidget {
   Widget build(BuildContext context, ref) {
     final ThemeData(:colorScheme) = Theme.of(context);
     final GoRouterState(:matchedLocation) = GoRouterState.of(context);
+
+    ref.read(websocketProvider);
 
     final selectedIndex = useMemoized(
       () {

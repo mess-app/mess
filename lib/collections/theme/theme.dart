@@ -24,7 +24,7 @@ final lightColorScheme = ColorScheme.light(
   secondary: Color(brandColors.englishViolet),
   secondaryContainer: Color(brandColors.battleshipGray),
   onSecondary: Colors.white,
-  onSecondaryContainer: Colors.grey[800]!,
+  onSecondaryContainer: Colors.grey[50]!,
   surface: Colors.white,
   surfaceVariant: Color(brandColors.lightGray),
   onSurface: Colors.grey[900]!,

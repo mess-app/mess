@@ -45,13 +45,12 @@ final routerProvider = Provider((ref) {
             builder: (context, state) => const ChatsPage(),
             routes: [
               GoRoute(
-                path: ":username",
+                path: ":connection",
                 name: ChatPage.name,
                 parentNavigatorKey: rootNavigatorKey,
                 builder: (context, state) {
-                  final username = state.pathParameters["username"]!;
-
-                  return ChatPage(username: username);
+                  return ChatPage(
+                      connectionId: state.pathParameters["connection"]!);
                 },
               ),
             ],

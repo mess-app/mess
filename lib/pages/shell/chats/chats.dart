@@ -81,11 +81,7 @@ class ChatsPage extends HookConsumerWidget {
                     onTap: () {
                       context.pushNamed(
                         ChatPage.name,
-                        pathParameters: {
-                          "username":
-                              (connection.pioneer ?? connection.recipient)!
-                                  .username
-                        },
+                        pathParameters: {"connection": connection.id},
                       );
                     },
                   );

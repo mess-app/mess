@@ -2,26 +2,62 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mess/collections/formatters.dart';
 import 'package:mess/collections/icons.dart';
 import 'package:mess/models/models.dart';
-import 'package:mess/providers/supabase/profile/find.dart';
+import 'package:mess/modules/chats/chat/chat_tile.dart';
+import 'package:mess/providers/supabase/connections/connections.dart';
+import 'package:mess/providers/supabase/profile/profile.dart';
+import 'package:mess/providers/websocket/connection/connection.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+
+final today = DateTime.now();
 
 class ChatPage extends HookConsumerWidget {
   static const name = "chat_page";
 
-  final String username;
-  const ChatPage({super.key, required this.username});
+  final String connectionId;
+  const ChatPage({super.key, required this.connectionId});
 
   @override
   Widget build(BuildContext context, ref) {
-    final ThemeData(:colorScheme) = Theme.of(context);
-    final profileQuery = ref.watch(findProfileProvider(username));
-    final profile = profileQuery.asData?.value ?? Fake.profile;
+    final ThemeData(:colorScheme, :textTheme) = Theme.of(context);
+    final scrollController = useScrollController();
+    final messageController = useTextEditingController();
+    final focusNode = useFocusNode();
+
+    final userProfile = ref.watch(userProfileProvider);
+
+    final connection = ref.watch(
+      connectionsProvider.select(
+        (s) =>
+            s.whenData((data) => data.firstWhere((e) => e.id == connectionId)),
+      ),
+    );
+
     final isEditing = useState(false);
 
+    final messages = ref.watch(connectionMessagesGroupedProvider(connectionId));
+    final messagesNotifier =
+        ref.watch(connectionMessageProvider(connectionId).notifier);
+
+    final connectionRecipient = connection.asData?.value.recipient ??
+        connection.asData?.value.pioneer ??
+        Fake.profile;
+
+    void onSendMessage() {
+      messagesNotifier.sendMessage(messageController.text);
+      messageController.clear();
+      scrollController.animateTo(
+        scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.decelerate,
+      );
+      focusNode.requestFocus();
+    }
+
     return Skeletonizer(
-      enabled: profileQuery.isLoading,
+      enabled: connection.isLoading,
       child: Scaffold(
         body: Column(
           children: [
@@ -33,11 +69,13 @@ class ChatPage extends HookConsumerWidget {
                 child: Container(
                   color: colorScheme.primaryContainer,
                   child: CustomScrollView(
+                    controller: scrollController,
                     slivers: [
                       SliverAppBar(
-                        title: Text("${profile.firstName} ${profile.lastName}"),
+                        title: Text(
+                            "${connectionRecipient.firstName} ${connectionRecipient.lastName}"),
                         titleSpacing: 0,
-                        floating: false,
+                        floating: true,
                         actions: [
                           IconButton(
                             icon: const Icon(AppIcons.call, size: 20),
@@ -51,6 +89,69 @@ class ChatPage extends HookConsumerWidget {
                         ],
                         toolbarHeight: 48,
                       ),
+                      const SliverGap(10),
+                      for (final MapEntry(key: date, value: messages)
+                          in messages.entries)
+                        SliverMainAxisGroup(
+                          slivers: [
+                            SliverToBoxAdapter(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    alignment: Alignment.center,
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 5,
+                                      horizontal: 10,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: colorScheme.secondaryContainer
+                                          .withOpacity(0.5),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Text(
+                                      today.difference(date).inDays == 0
+                                          ? "Today"
+                                          : formatDateAsDayMonth.format(date),
+                                      style: textTheme.bodySmall?.copyWith(
+                                        color: colorScheme.onSecondaryContainer,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SliverGap(10),
+                            SliverList.separated(
+                              itemCount: messages.length,
+                              separatorBuilder: (context, index) {
+                                if (index == messages.length - 1) {
+                                  return const Gap(20);
+                                }
+
+                                final message = messages[index];
+                                final nextMessage = messages[index + 1];
+                                final isUser = message.recipientId !=
+                                    userProfile.asData?.value?.id;
+                                final isNextUser = nextMessage.recipientId !=
+                                    userProfile.asData?.value?.id;
+
+                                if (isUser && isNextUser) {
+                                  return const Gap(10);
+                                }
+
+                                return const Gap(20);
+                              },
+                              itemBuilder: (context, index) {
+                                final message = messages[index];
+
+                                return ChatTile(message: message);
+                              },
+                            ),
+                          ],
+                        ),
+                      const SliverGap(10),
                     ],
                   ),
                 ),
@@ -125,11 +226,13 @@ class ChatPage extends HookConsumerWidget {
                     const Gap(5),
                     Expanded(
                       child: TextField(
+                        controller: messageController,
+                        focusNode: focusNode,
                         onTap: () {
                           isEditing.value = true;
                         },
                         onSubmitted: (value) {
-                          isEditing.value = false;
+                          onSendMessage();
                         },
                         decoration: InputDecoration(
                           hintText: 'Type a message',
@@ -157,7 +260,9 @@ class ChatPage extends HookConsumerWidget {
                                 backgroundColor: colorScheme.primary,
                                 foregroundColor: colorScheme.onPrimary,
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                onSendMessage();
+                              },
                             )
                           : IconButton(
                               icon: const Icon(AppIcons.mic),

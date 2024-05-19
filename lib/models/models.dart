@@ -9,3 +9,6 @@ part 'fake.dart';
 part 'supabase/profile.dart';
 part 'supabase/connections.dart';
 part 'supabase/groups.dart';
+
+part 'websocket/events.dart';
+part 'websocket/message.dart';

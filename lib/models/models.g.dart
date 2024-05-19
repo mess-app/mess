@@ -141,3 +141,56 @@ Map<String, dynamic> _$$SupabaseGroupConnectionImplToJson(
       'inviter': instance.inviter,
       'group_id': instance.groupId,
     };
+
+_$WebsocketSendMessageEventImpl _$$WebsocketSendMessageEventImplFromJson(
+        Map<String, dynamic> json) =>
+    _$WebsocketSendMessageEventImpl(
+      event: $enumDecode(_$WebsocketEventTypeEnumMap, json['event']),
+      data: WebsocketMessageEventData.fromJson(
+          json['data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$WebsocketSendMessageEventImplToJson(
+        _$WebsocketSendMessageEventImpl instance) =>
+    <String, dynamic>{
+      'event': _$WebsocketEventTypeEnumMap[instance.event]!,
+      'data': instance.data,
+    };
+
+const _$WebsocketEventTypeEnumMap = {
+  WebsocketEventType.sendMessage: 'send_message',
+  WebsocketEventType.receiveMessage: 'receive_message',
+};
+
+_$WebsocketReceiveMessageEventImpl _$$WebsocketReceiveMessageEventImplFromJson(
+        Map<String, dynamic> json) =>
+    _$WebsocketReceiveMessageEventImpl(
+      event: $enumDecode(_$WebsocketEventTypeEnumMap, json['event']),
+      data: WebsocketMessageEventData.fromJson(
+          json['data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$WebsocketReceiveMessageEventImplToJson(
+        _$WebsocketReceiveMessageEventImpl instance) =>
+    <String, dynamic>{
+      'event': _$WebsocketEventTypeEnumMap[instance.event]!,
+      'data': instance.data,
+    };
+
+_$WebsocketMessageEventDataImpl _$$WebsocketMessageEventDataImplFromJson(
+        Map<String, dynamic> json) =>
+    _$WebsocketMessageEventDataImpl(
+      connectionId: json['connection_id'] as String,
+      recipientId: json['recipient_id'] as String,
+      message: json['message'] as String,
+      createdAt: DateTime.parse(json['created_at'] as String),
+    );
+
+Map<String, dynamic> _$$WebsocketMessageEventDataImplToJson(
+        _$WebsocketMessageEventDataImpl instance) =>
+    <String, dynamic>{
+      'connection_id': instance.connectionId,
+      'recipient_id': instance.recipientId,
+      'message': instance.message,
+      'created_at': instance.createdAt.toIso8601String(),
+    };

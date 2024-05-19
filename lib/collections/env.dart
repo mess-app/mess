@@ -12,6 +12,8 @@ abstract class Env {
   static final String googleIosClientId = _Env.googleIosClientId;
   @EnviedField(varName: 'GOOGLE_WEB_CLIENT_ID')
   static final String googleWebClientId = _Env.googleWebClientId;
+  @EnviedField(varName: 'SERVER_URL')
+  static final String serverUrl = _Env.serverUrl;
 
   static const loginCallbackUrl = "mess://login-callback";
 }

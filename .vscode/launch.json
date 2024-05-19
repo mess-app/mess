@@ -7,19 +7,22 @@
     {
       "name": "mess",
       "request": "launch",
-      "type": "dart"
+      "type": "dart",
+      "program": "${workspaceFolder}/lib/main.dart"
     },
     {
       "name": "mess (profile mode)",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "profile"
+      "flutterMode": "profile",
+      "program": "${workspaceFolder}/lib/main.dart"
     },
     {
       "name": "mess (release mode)",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "release"
+      "flutterMode": "release",
+      "program": "${workspaceFolder}/lib/main.dart"
     }
   ]
 }
